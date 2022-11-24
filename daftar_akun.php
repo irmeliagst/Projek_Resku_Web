@@ -16,15 +16,15 @@ include 'koneksi.php';
   <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
 
-  <title>Halaman Menu</title>
+  <title>Halaman Akun</title>
 </head>
 
 <body>
-  <br>
+    <br>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg  bg-dark">
     <div class="container">
-      <a class="navbar-brand text-white" href="index.html"><strong>Halaman Menu</a>
+      <a class="navbar-brand text-white" href="index.html"><strong>Halaman Akun</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -63,11 +63,11 @@ include 'koneksi.php';
   <!-- Menu -->
  
   <div class="container">
-    <a href="tambah_menu.php" class="btn btn-success mt-6">Tambah Menu</a>
+    <a href="tambah_akun.php" class="btn btn-success mt-6">Tambah Akun</a>
     <div class="row mt-9">
       <?php
       require('koneksi.php');
-      $result = $koneksi->query('select * from menu');
+      $result = $koneksi->query('select * from akun');
       while ($data = mysqli_fetch_assoc($result)) { ?>
        <br><br>
         <div class="col-md-3">

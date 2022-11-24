@@ -1,7 +1,11 @@
+<?php 
+include 'koneksi.php';
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    <!-- Required meta tags --> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,22 +15,26 @@
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-
     <title>Halaman Tambah Akun</title>
   </head>
   <body>
  
  <!-- Form Registrasi -->
   <div class="container">
-    <h3 class="text-center mt-3 mb-5">HALAMAN TAMBAH AKUN</h3>
+    <h3 class="text-center mt-3 mb-5">Talaman Tambah Akun</h3>
     <div class="card p-5 mb-5">
-    <form method="POST" action="simpan_register.php">
-      <div class="form-row">
-        <div class="form-group col-md-6">
+      <form method="POST" action="" enctype="multipart/form-data">
+      <!-- <form method="POST" action="daftar_akun.php"> -->
+      <div class="form-row"> 
+        <div class="form-group col-md-2">
+          <label for="id">Id</label>
+          <input type="text" class="form-control" id="id" name="id" placeholder="Masukan Id">
+        </div>
+        <div class="form-group col-md-5">
           <label for="user">Username</label>
           <input type="text" class="form-control" id="user" name="username" placeholder="Masukan Username">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-5">
           <label for="pass">Password</label>
           <input type="password" class="form-control" id="pass" name="password" placeholder="Masukan Password">
         </div>
@@ -52,8 +60,8 @@
       </div> -->
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="rumah">Alamat</label>
-          <input type="text" class="form-control" id="rumah" name="alamat" placeholder="Masukan Alamat">
+          <label for="alamat">Alamat</label>
+          <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukan Alamat">
         </div>
         <div class="form-group col-md-2">
           <label for="telp">No. Telephone</label>
@@ -67,13 +75,51 @@
             <option value="admin">Admin</option>
           </select>
         </div>
-      </div>     
-      <button type="tambah" class="btn btn-primary">Tambah</button>
-      <!-- <button type="reset" class="btn btn-danger">Reset</button> -->
+      </div>      
     </form>
+        <div class="form-group">
+          <label for="gambar">Foto Akun</label>
+          <input type="file" class="form-control-file border" id="gambar" name="gambar">
+        </div><br>
+        <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
+        <!-- <button type="reset" class="btn btn-danger" name="reset">Hapus</button>
+        <button type="reset" class="btn btn-danger" name="reset">Batal</button> -->
+      </form>
+      
+
+      <?php 
+  if(isset($_POST['tambah'])){
+    $id = $_POST['id'];
+    $user = $_POST['username'];
+    $pass = $_POST['password'];
+    $nama = $_POST['nama_lengkap'];
+    $jk = $_POST['jenis_kelamin'];
+    $alamat = $_POST['alamat'];
+    $telp = $_POST['telp'];
+    $sts = $_POST['status'];
+    $nama_file = $_FILES['gambar']['name'];
+    $source = $_FILES['gambar']['tmp_name'];
+    $folder = './upload/';
+
+    move_uploaded_file($source, $folder.$nama_file);
+    $insert = mysqli_query($koneksi, "INSERT INTO akun VALUES ('$id', '$nama', '$username', '$password', '$status', '$jenis_kelamin', '$telp', '$alamat', '$gambar')");
+
+    if($insert){
+      header("location: daftar_menu.php");
+    }
+    else {
+      echo "Maaf, terjadi kesalahan saat mencoba menyimpan data ke database";
+    }
+  }
+
+   ?>
+
   </div>
   </div>
   <!-- Akhir Form Registrasi -->
+
+
+  
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
