@@ -39,27 +39,28 @@ include 'koneksi.php';
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link mr-4" href="index.html">HOME</a>
+              <a class="nav-link mr-4" href="#">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mr-4" href="daftar_menu.html">DAFTAR MENU</a>
+              <a class="nav-link mr-4" href="#">DAFTAR MENU</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mr-4" href="pesanan.html">PESANAN</a>
+              <a class="nav-link mr-4" href="#">PESANAN</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mr-4" href="#">LOGOUT</a>
+              <a class="nav-link mr-4" href="login.php">LOGOUT</a>
             </li>
           </ul>
-        </div> -->
+        </div>
     </div>
   </nav>
   <!-- Akhir Navbar -->
 
   <!-- Menu -->
+ 
   <div class="container">
     <a href="tambah_menu.php" class="btn btn-success mt-3">Tambah Menu</a>
     <div class="row mt-3">
@@ -67,9 +68,11 @@ include 'koneksi.php';
       require('koneksi.php');
       $result = $koneksi->query('select * from menu');
       while ($data = mysqli_fetch_assoc($result)) { ?>
+       <br><br>
         <div class="col-md-3">
+          <br><br>
           <div class="card border-dark">
-            <img src="images/<?=$data['gambar']?>" class="card-img-top" alt="...">
+            <img src="images/<?=$data['gambar']?>" class="card-img-top" alt="..." width="200" height="260">
             <div class="card-body">
               <h5 class="card-title font-weight-bold"><?= $data['nama'] ?></h5>
               <label class="card-text harga">Rp. <?= $data['harga'] ?></label><br>
@@ -82,6 +85,7 @@ include 'koneksi.php';
 
     </div>
   </div>
+ 
   <!-- Akhir Menu -->
 
   <!-- Awal Footer -->
