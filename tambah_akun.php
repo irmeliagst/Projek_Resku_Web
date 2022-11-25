@@ -24,7 +24,6 @@ include 'koneksi.php';
     <h3 class="text-center mt-3 mb-5">Talaman Tambah Akun</h3>
     <div class="card p-5 mb-5">
       <form method="POST" action="" enctype="multipart/form-data">
-      <!-- <form method="POST" action="daftar_akun.php"> -->
       <div class="form-row"> 
         <div class="form-group col-md-2">
           <label for="id">Id</label>
@@ -102,10 +101,10 @@ include 'koneksi.php';
     $folder = './upload/';
 
     move_uploaded_file($source, $folder.$nama_file);
-    $insert = mysqli_query($koneksi, "INSERT INTO akun VALUES ('$id', '$nama', '$username', '$password', '$status', '$jenis_kelamin', '$telp', '$alamat', '$gambar')");
+    $insert = mysqli_query($koneksi, "INSERT INTO akun VALUES ('$id', '$nama', '$username', '$password', '$status', '$jk', '$telp', '$alamat', '$gambar')");
 
     if($insert){
-      header("location: daftar_menu.php");
+      header("location: daftar_akun.php");
     }
     else {
       echo "Maaf, terjadi kesalahan saat mencoba menyimpan data ke database";

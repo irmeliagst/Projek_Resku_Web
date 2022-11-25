@@ -33,9 +33,20 @@ include 'koneksi.php';
           <input type="text" class="form-control" id="menu1" name="nama_menu">
         </div>
         <div class="form-group">
-          <label for="#">Jenis Menu</label>
-          <div class="form-check">
-            <label class="form-check-label">
+          <label for="jenis">Jenis Menu</label><br>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="jenis_menu" id="jk" value="Makanan">
+          <label class="form-check-label" for="jenis">Makanan</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="jenis_menu" id="jk" value="Minuman">
+          <label class="form-check-label" for="jenis">Minuman</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="jenis_menu" id="jk" value="Camilan">
+          <label class="form-check-label" for="jenis">Camilan</label>
+        </div>
+            <!-- <label class="form-check-label">
               <input type="radio" class="form-check-input" value="Makanan" name="jenis_menu" checked>Makanan 
             </label>
           </div>
@@ -44,6 +55,11 @@ include 'koneksi.php';
               <input type="radio" class="form-check-input" value="Minuman" name="jenis_menu">Minuman
             </label>
           </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" value="Camilan" name="jenis_menu">Camilan
+            </label>
+          </div> -->
          </div>
         <div class="form-group">
           <label for="harga1">Harga Menu</label>
