@@ -85,7 +85,7 @@ include 'koneksi.php';
     $folder = './upload/';
 
     move_uploaded_file($source, $folder.$nama_file);
-    $insert = mysqli_query($koneksi, "INSERT INTO menu VALUES ('$id', '$nama_file', '$nama', '$jenis', '$harga')");
+    $insert = mysqli_query($koneksi, "INSERT INTO menu VALUES ('$id', '$gambar', '$nama', '$jenis', '$harga')");
 
     if($insert){
       header("location: daftar_menu.php");
