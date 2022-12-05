@@ -75,8 +75,8 @@ include 'koneksi.php';
           <div class="card border-dark">
             <img src="images/<?=$data['gambar']?>" class="card-img-top" alt="..." width="200" height="260">
             <div class="card-body">
-              <!-- <h5 class="card-title font-weight-bold"><?= $data['nama'] ?></h5>
-              <label class="card-text harga">Rp. <?= $data['harga'] ?></label><br> -->
+              <h5 class="card-title font-weight-bold"><?= $data['nama'] ?></h5>
+              <label class="card-text harga">Rp. <?= $data['harga'] ?></label><br>
               <a href="#" class="btn btn-primary btn-sm">EDIT</a>
               <a href="#" class="btn btn-danger btn-sm">HAPUS</a>
             </div>

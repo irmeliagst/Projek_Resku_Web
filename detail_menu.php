@@ -16,7 +16,7 @@ include 'koneksi.php';
   <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
 
-  <title>Halaman Menu</title>
+  <title>Halaman Detail Menu</title>
 </head>
 
 <body>
@@ -24,7 +24,7 @@ include 'koneksi.php';
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg  bg-dark">
     <div class="container">
-      <a class="navbar-brand text-white" href="index.html"><strong>Menu</a>
+      <a class="navbar-brand text-white" href="index.html"><strong>Detail Menu</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -64,7 +64,7 @@ include 'koneksi.php';
  
   <div class="container">
     <!-- <a href="tambah_menu.php" class="btn btn-success mt-6">Tambah Menu</a> -->
-    <div class="row mt-9">
+    <div class="row mt-12">
       <?php
       require('koneksi.php');
       $result = $koneksi->query('select * from menu');
@@ -73,10 +73,8 @@ include 'koneksi.php';
         <div class="col-md-3">
           <br><br>
           <div class="card border-dark">
-            
             <img src="images/<?=$data['gambar']?>" class="card-img-top" alt="..." width="200" height="260">
             <div class="card-body">
-            <a href="detail_menu.php"></a>
               <h5 class="card-title font-weight-bold"><?= $data['nama'] ?></h5>
               <label class="card-text harga">Rp. <?= $data['harga'] ?></label><br>
               <!-- <a href="#" class="btn btn-primary btn-sm">EDIT</a>

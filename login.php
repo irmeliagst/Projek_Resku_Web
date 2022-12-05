@@ -47,7 +47,7 @@ if(isset($_POST['submit'])) {
   <!-- Form Login --> 
   
     <div class="container ">
-      <h4 class="text-center">Silahkan isikan nama...</h4>
+      <!-- <h4 class="text-center">Silahkan isikan nama...</h4> -->
       <img src="images/login.png" class="card-img-center" width="360" height="280" alt="...">
       <h4 class="text-center">Log-In</h4>
       <hr>

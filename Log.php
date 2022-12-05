@@ -1,32 +1,22 @@
+
+
 <?php 
 include 'koneksi.php';
+  if(isset($_POST['tambah'])){
+    $id = $_POST['id'];
+    $nama = $_POST['nama'];
+    
+    $insert = mysqli_query($koneksi, "INSERT INTO pengunjung VALUES ('$id', '$nama')");
 
-if(isset($_POST['submit'])) {
-  $user = $_POST['username'];
-  $password = $_POST['password'];
-
-  // Query untuk memilih tabel
-  $cek_data = mysqli_query($koneksi, "SELECT * FROM akun WHERE username = '$user' AND password = '$password'");
-  $hasil = mysqli_fetch_array($cek_data);
-  $status = $hasil['status'];
-  $login_user = $hasil['username'];
-  $row = mysqli_num_rows($cek_data);
-
-  // Pengecekan Kondisi Login Berhasil/Tidak
-    if ($row > 0) {
-        session_start();   
-        $_SESSION['login_user'] = $login_user;
-
-        if ($status == 'admin') {
-          header('location: daftar_menu.php');
-        }elseif ($status == 'user') {
-          header('location: user.php'); 
-        }
-    }else{
-        header("location: login.php");
+    if($insert){
+      header("location: detail_pesanan.php");
     }
-}
-?>
+    else {
+      echo "Maaf, terjadi kesalahan saat mencoba menyimpan data ke database";
+    }
+  }
+
+   ?>
 
 <!doctype html>
 <html lang="en">
@@ -41,7 +31,7 @@ if(isset($_POST['submit'])) {
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
-    <title>Halaman Login</title>
+    <title>Halaman Pengunjung</title>
   </head>
   <body>
   <!-- Form Login --> 
@@ -51,30 +41,30 @@ if(isset($_POST['submit'])) {
       <img src="images/login.png" class="card-img-center" width="360" height="280" alt="...">
       <h4 class="text-center">Log-In</h4>
       <hr>
-      <form method="POST" action="login.php">
+      <form method="POST" action="menu_pembeli.php">
         <div class="form-group">
-          <label for="exampleInputEmail1">Username</label>
+          <label for="exampleInputEmail1">Id</label>
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text"><i class="fas fa-user"></i></div>
               </div>
-              <input type="text" class="form-control" placeholder="Masukkan Username" name="username">
+              <input type="text" class="form-control" placeholder="Masukkan id" name="id">
             </div>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
+          <label for="exampleInputPassword1">Nama</label>
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text"><i class="fas fa-unlock-alt"></i></div>
               </div>
-              <input type="password" class="form-control" placeholder="Masukkan Password" name="password">
+              <input type="password" class="form-control" placeholder="Masukkan nama" name="nama">
           </div>
         </div>
         <!-- <div class="mb-3" >
           <small><a href="register.php" class="text-dark">Belum Punya Akun ? Buat Akun Anda !</a></small>
         </div> -->
         <center>  
-        <button  type="submit" name="submit" class="btn btn-primary">LOGIN</button>
+        <button  type="submit" name="submit" class="btn btn-primary" name="tambah">LOGIN</button>
       </center>
         <!-- <button type="reset" name="reset" class="btn btn-danger">RESET</button> -->
       </form>
