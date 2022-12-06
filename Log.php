@@ -15,7 +15,6 @@ include 'koneksi.php';
       echo "Maaf, terjadi kesalahan saat mencoba menyimpan data ke database";
     }
   }
-
    ?>
 
 <!doctype html>
