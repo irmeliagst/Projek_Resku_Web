@@ -1,11 +1,15 @@
-<?php 
+<?php
+
 include('koneksi.php');
 
 $id_menu = $_GET['id_menu'];
+if (!$id_menu) {
+  header("Location: daftar_menu.php");
+}
 
-$ambil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_menu='$id_menu'");
+$ambil = mysqli_query($koneksi, "SELECT * FROM menu WHERE id='$id_menu'");
 $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
-
+// print_r($result);
 ?>
 
 <!doctype html>
@@ -22,7 +26,7 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
 
-    <title>Form Edit Menu</title>
+    <title>Halaman Edit Menu</title>
   </head>
   <body>
  
@@ -30,44 +34,99 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
   <div class="container">
     <h3 class="text-center mt-3 mb-5">SILAHKAN EDIT MENU</h3>
     <div class="card p-5 mb-5">
-      <form method="POST" action="edit.php" enctype="multipart/form-data">
+      <form method="POST" action="edit_menu.php" enctype="multipart/form-data">
         <div class="form-group">
+        <input type="hidden" name="id" value="<?=$result[0]['id']?>">
           <label for="menu1">Nama Menu</label>
-          <input type="hidden" name="id_menu" value="<?php echo $result[0]['id_menu'] ?>">
-          <input type="text" class="form-control" id="menu1" name="nama_menu" value="<?php echo $result[0]['nama_menu'] ?>">
+          <input type="text" class="form-control" id="menu1" name="nama" value="<?= $result[0]['nama'] ?>" required>
         </div>
         <div class="form-group">
-          <label for="#">Jenis Menu</label>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="jenis_menu" value="Makanan">Makanan 
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" value="Minuman" name="jenis_menu">Minuman
-            </label>
-          </div>
-         </div>
-        <div class="form-group">
-          <label for="stok1">Stok</label>
-          <input type="text" class="form-control" id="stok1" name="stok" value="<?php echo $result[0]['stok'] ?>">
+          <label for="jenis">Jenis Menu</label><br>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="jenis" id="jk" value="Makanan">
+          <label class="form-check-label" for="jenis">Makanan</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="jenis" id="jk" value="Minuman">
+          <label class="form-check-label" for="jenis">Minuman</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="jenis" id="jk" value="Camilan">
+          <label class="form-check-label" for="jenis">Camilan</label>
         </div>
         <div class="form-group">
           <label for="harga1">Harga Menu</label>
-          <input type="text" class="form-control" id="harga1" name="harga" value="<?php echo $result[0]['harga'] ?>">
+          <input type="text" class="form-control" id="harga1" name="harga" value="<?= $result[0]['harga'] ?>" required>
         </div>
         <div class="form-group">
           <label for="gambar">Foto Menu</label>
-          <input type="file" class="form-control-file border" id="gambar" name="gambar">
+          <input type="file" class="form-control-file border" id="gambar" name="gambar" required>
         </div><br>
         <button type="submit" class="btn btn-primary" name="tambah">Edit</button>
-        <button type="reset" class="btn btn-danger" name="reset">Hapus</button>
+        <!-- <button type="reset" class="btn btn-danger" name="reset">Hapus</button> -->
+        <a href="daftar_menu.php" class="btn btn-success mt-6">Cancel</a>
+        </form>
   </div>
   </div>
   <!-- Akhir Form Registrasi --> 
 
+  <?php 
 
+
+// $auto = mysqli_query("SELECT max(id) as max_id FROM menu");
+// $data = mysqli_fetch_array($auto);
+// $code = $data['max_id'];
+// $urutan = (int)substr($code, 1, 3);
+// $urutan++;
+// $huruf = "K";
+// $kd_kat = $huruf . sprintf("%03s", $urutan);
+
+  if(isset($_POST['tambah'])){
+    $id = $_POST['id'];
+    $nama = $_POST['nama'];
+    $jenis = $_POST['jenis'];
+    $harga = $_POST['harga'];
+    $id_kategori = $_POST['id_kat'];
+    // $nama_file = $_FILES['gambar']['name'];
+    // $source = $_FILES['gambar']['tmp_name'];
+    // $folder = './upload/';
+    // move_uploaded_file($source, $folder.$nama_file);
+    // $insert = mysqli_query($koneksi, "INSERT INTO menu VALUES ('$id', '$gambar', '$nama', '$jenis', '$harga')");
+
+  
+			$ekstensi_diperbolehkan	= array('png','jpg','jpeg','gif');
+			$gambar = $_FILES['gambar']['name'];
+			$x = explode('.', $gambar);
+			$ekstensi = strtolower(end($x));
+			$ukuran	= $_FILES['gambar']['size'];
+			$file_tmp = $_FILES['gambar']['tmp_name'];	
+ 
+			if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+				if($ukuran < 1044070){			
+					move_uploaded_file($file_tmp, 'images/'.$gambar);
+					$update = mysqli_query($koneksi, "UPDATE `menu` SET `gambar`='$gambar',`nama`='$nama',`jenis`='$nama',`harga`='$harga' WHERE id='$id' ");
+          if($update){
+            header("Location: daftar_menu.php");
+            echo 'FILE BERHASIL DI UPLOAD';
+      }else{
+        echo 'GAGAL MENGUPLOAD GAMBAR';
+      }
+				}else{
+					echo 'UKURAN FILE TERLALU BESAR';
+				}
+			}else{
+				echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN';
+			}
+		}
+    // if($insert){
+    //   header("location: daftar_menu.php");
+    // }
+    // else {
+    //   echo "Maaf, terjadi kesalahan saat mencoba menyimpan data ke database";
+    // }
+  
+
+   ?>
   
 
     <!-- Optional JavaScript -->

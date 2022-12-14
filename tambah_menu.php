@@ -1,5 +1,8 @@
 <?php 
 include 'koneksi.php';
+// if (!$id_login) {
+//   header("Location: daftar_menu.php");
+// }
 ?>
 
 <!doctype html>
@@ -23,14 +26,14 @@ include 'koneksi.php';
   <div class="container">
     <h3 class="text-center mt-3 mb-5">Talaman Tambah Menu</h3>
     <div class="card p-5 mb-5">
-      <form method="POST" action="" enctype="multipart/form-data">
-      <div class="form-group">
+      <form method="POST" action="tambah_menu.php" enctype="multipart/form-data">
+      <!-- <div class="form-group">
           <label for="id1">id</label>
           <input type="text" class="form-control" id="id1" name="id">
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="menu1">Nama Menu</label>
-          <input type="text" class="form-control" id="menu1" name="nama_menu">
+          <input type="text" class="form-control" id="menu1" name="nama_menu" required>
         </div>
         <div class="form-group">
           <label for="jenis">Jenis Menu</label><br>
@@ -63,11 +66,11 @@ include 'koneksi.php';
          </div>
         <div class="form-group">
           <label for="harga1">Harga Menu</label>
-          <input type="text" class="form-control" id="harga1" name="harga">
+          <input type="text" class="form-control" id="harga1" name="harga"  required>
         </div>
         <div class="form-group">
           <label for="gambar">Foto Menu</label>
-          <input type="file" class="form-control-file border" id="gambar" name="gambar">
+          <input type="file" class="form-control-file border" id="gambar" name="gambar" required>
         </div><br>
         <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
         <!-- <button type="reset" class="btn btn-danger" name="reset">Hapus</button>
@@ -75,25 +78,59 @@ include 'koneksi.php';
       </form>
 
       <?php 
+
+
+// $auto = mysqli_query("SELECT max(id) as max_id FROM menu");
+// $data = mysqli_fetch_array($auto);
+// $code = $data['max_id'];
+// $urutan = (int)substr($code, 1, 3);
+// $urutan++;
+// $huruf = "K";
+// $kd_kat = $huruf . sprintf("%03s", $urutan);
+
   if(isset($_POST['tambah'])){
-    $id = $_POST['id'];
+    $id = '';
     $nama = $_POST['nama_menu'];
     $jenis = $_POST['jenis_menu'];
     $harga = $_POST['harga'];
-    $nama_file = $_FILES['gambar']['name'];
-    $source = $_FILES['gambar']['tmp_name'];
-    $folder = './upload/';
+    // $nama_file = $_FILES['gambar']['name'];
+    // $source = $_FILES['gambar']['tmp_name'];
+    // $folder = './upload/';
+    // move_uploaded_file($source, $folder.$nama_file);
+    // $insert = mysqli_query($koneksi, "INSERT INTO menu VALUES ('$id', '$gambar', '$nama', '$jenis', '$harga')");
 
-    move_uploaded_file($source, $folder.$nama_file);
-    $insert = mysqli_query($koneksi, "INSERT INTO menu VALUES ('$id', '$gambar', '$nama', '$jenis', '$harga')");
-
-    if($insert){
-      header("location: daftar_menu.php");
-    }
-    else {
-      echo "Maaf, terjadi kesalahan saat mencoba menyimpan data ke database";
-    }
-  }
+  
+			$ekstensi_diperbolehkan	= array('png','jpg','jpeg','gif');
+			$gambar = $_FILES['gambar']['name'];
+			$x = explode('.', $gambar);
+			$ekstensi = strtolower(end($x));
+			$ukuran	= $_FILES['gambar']['size'];
+			$file_tmp = $_FILES['gambar']['tmp_name'];	
+ 
+			if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+				if($ukuran < 1044070){			
+					move_uploaded_file($file_tmp, 'images/'.$gambar);
+					$insert = mysqli_query($koneksi, "INSERT INTO menu VALUES ('$id', '$gambar', '$nama', '$jenis', '$harga')");
+					if($insert){
+            header("Location: daftar_menu.php");
+						echo 'FILE BERHASIL DI UPLOAD';
+					}else{
+						echo 'GAGAL MENGUPLOAD GAMBAR';
+					}
+				}else{
+					echo 'UKURAN FILE TERLALU BESAR';
+				}
+			}else{
+				echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN';
+			}
+		}
+    // if($insert){
+    //   header("location: daftar_menu.php");
+    // }
+    // else {
+    //   echo "Maaf, terjadi kesalahan saat mencoba menyimpan data ke database";
+    // }
+  
 
    ?>
 

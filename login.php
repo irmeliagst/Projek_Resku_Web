@@ -6,7 +6,7 @@ if(isset($_POST['submit'])) {
   $password = $_POST['password'];
 
   // Query untuk memilih tabel
-  $cek_data = mysqli_query($koneksi, "SELECT * FROM akun WHERE username = '$user' AND password = '$password'");
+  $cek_data = mysqli_query($koneksi, "SELECT * FROM login WHERE username = '$user' AND password = '$password'");
   $hasil = mysqli_fetch_array($cek_data);
   $status = $hasil['status'];
   $login_user = $hasil['username'];
@@ -40,15 +40,16 @@ if(isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
     <title>Halaman Login</title>
   </head>
   <body>
   <!-- Form Login --> 
   
-    <div class="container ">
+    <div class ="container ">
       <!-- <h4 class="text-center">Silahkan isikan nama...</h4> -->
-      <img src="images/login.png" class="card-img-center" width="360" height="280" alt="...">
+      <img src="images/login.png" class="card-img-center" class="img-responsive" alt="Cinque Terre" width="360" height="280">
       <h4 class="text-center">Log-In</h4>
       <hr>
       <form method="POST" action="login.php">
@@ -81,7 +82,7 @@ if(isset($_POST['submit'])) {
   <!-- Akhir Form Login -->
 
     </div>
-    <br><br>
+    <br>
   <!-- Akhir Eksekusi Form Login -->
 
 
@@ -97,5 +98,9 @@ if(isset($_POST['submit'])) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="bootstrap/dist/js/jquery-3.3.1.min.js"></script>
+		<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
 </html>
