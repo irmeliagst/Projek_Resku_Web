@@ -24,7 +24,6 @@ if (isset($_POST['tambah'])) {
   $ekstensi = strtolower(end($x));
   $ukuran  = $_FILES['gambar']['size'];
   $file_tmp = $_FILES['gambar']['tmp_name'];
-
   if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
     if ($ukuran < 1044070) {
       move_uploaded_file($file_tmp, 'images/' . $gambar);
