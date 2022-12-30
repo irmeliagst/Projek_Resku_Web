@@ -35,7 +35,7 @@ include 'koneksi.php';
           <label for="menu1">Nama Menu</label>
           <input type="text" class="form-control" id="menu1" name="nama_menu" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="jenis">Jenis Menu</label><br>
           <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="jenis_menu" id="jk" value="Makanan">
@@ -48,7 +48,7 @@ include 'koneksi.php';
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="jenis_menu" id="jk" value="Camilan">
           <label class="form-check-label" for="jenis">Camilan</label>
-        </div>
+        </div> -->
             <!-- <label class="form-check-label">
               <input type="radio" class="form-check-input" value="Makanan" name="jenis_menu" checked>Makanan 
             </label>
@@ -63,7 +63,7 @@ include 'koneksi.php';
               <input type="radio" class="form-check-input" value="Camilan" name="jenis_menu">Camilan
             </label>
           </div> -->
-         </div>
+         
         <div class="form-group">
           <label for="harga1">Harga Menu</label>
           <input type="text" class="form-control" id="harga1" name="harga"  required>
@@ -73,35 +73,20 @@ include 'koneksi.php';
           <input type="file" class="form-control-file border" id="gambar" name="gambar" required>
         </div><br>
         <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
-        <!-- <button type="reset" class="btn btn-danger" name="reset">Hapus</button>
-        <button type="reset" class="btn btn-danger" name="reset">Batal</button> -->
       </form>
 
       <?php 
 
-
-// $auto = mysqli_query("SELECT max(id) as max_id FROM menu");
-// $data = mysqli_fetch_array($auto);
-// $code = $data['max_id'];
-// $urutan = (int)substr($code, 1, 3);
-// $urutan++;
-// $huruf = "K";
-// $kd_kat = $huruf . sprintf("%03s", $urutan);
-
   if(isset($_POST['tambah'])){
     $id = '';
     $nama = $_POST['nama_menu'];
-    $jenis = $_POST['jenis_menu'];
     $harga = $_POST['harga'];
-    // $nama_file = $_FILES['gambar']['name'];
-    // $source = $_FILES['gambar']['tmp_name'];
-    // $folder = './upload/';
-    // move_uploaded_file($source, $folder.$nama_file);
-    // $insert = mysqli_query($koneksi, "INSERT INTO menu VALUES ('$id', '$gambar', '$nama', '$jenis', '$harga')");
+    echo $nama.$harga;
 
   
 			$ekstensi_diperbolehkan	= array('png','jpg','jpeg','gif');
 			$gambar = $_FILES['gambar']['name'];
+      echo $gambar;
 			$x = explode('.', $gambar);
 			$ekstensi = strtolower(end($x));
 			$ukuran	= $_FILES['gambar']['size'];
@@ -110,13 +95,20 @@ include 'koneksi.php';
 			if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
 				if($ukuran < 1044070){			
 					move_uploaded_file($file_tmp, 'images/'.$gambar);
-					$insert = mysqli_query($koneksi, "INSERT INTO menu VALUES ('$id', '$gambar', '$nama', '$jenis', '$harga')");
-					if($insert){
+        try {
+          $insert = mysqli_query($koneksi, "INSERT INTO `menu`(`id`, `gambar`, `nama`, `harga`) VALUES ('$id', 'aha', '$nama', '$harga')");
+          print_r($insert);
+          new Exception("eror"); 
+          if($insert){
             header("Location: daftar_menu.php");
 						echo 'FILE BERHASIL DI UPLOAD';
 					}else{
+            print_r($insert);
 						echo 'GAGAL MENGUPLOAD GAMBAR';
 					}
+        } catch (Exception $e) {
+          echo $e->getMessage();
+        }
 				}else{
 					echo 'UKURAN FILE TERLALU BESAR';
 				}

@@ -49,7 +49,7 @@ if(isset($_POST['submit'])) {
   
     <div class ="container ">
       <!-- <h4 class="text-center">Silahkan isikan nama...</h4> -->
-      <img src="images/login.png" class="card-img-center" class="img-responsive" alt="Cinque Terre" width="360" height="280">
+      <img src="images/ress.png" class="card-img-center" class="img-responsive" alt="Cinque Terre" width="370" height="180">
       <h4 class="text-center">Log-In</h4>
       <hr>
       <form method="POST" action="login.php">
@@ -71,13 +71,9 @@ if(isset($_POST['submit'])) {
               <input type="password" class="form-control" placeholder="Masukkan Password" name="password">
           </div>
         </div>
-        <!-- <div class="mb-3" >
-          <small><a href="register.php" class="text-dark">Belum Punya Akun ? Buat Akun Anda !</a></small>
-        </div> -->
         <center>  
-        <button  type="submit" name="submit" class="btn btn-primary">LOGIN</button>
+        <button  type="submit" name="submit" class="btn btn-danger">LOGIN</button>
       </center>
-        <!-- <button type="reset" name="reset" class="btn btn-danger">RESET</button> -->
       </form>
   <!-- Akhir Form Login -->
 

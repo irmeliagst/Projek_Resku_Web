@@ -92,7 +92,7 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
           <input type="file" class="form-control-file border" id="gambar" name="gambar" required>
         </div><br>
         <button type="submit" class="btn btn-primary" name="tambah">Edit</button>
-        <button type="reset" class="btn btn-danger" name="reset">Hapus</button>
+        <a href="daftar_menu.php" class="btn btn-success mt-6">Cancel</a>
   </form>
   </div>
   </div>
