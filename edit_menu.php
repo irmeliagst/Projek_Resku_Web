@@ -41,20 +41,6 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
           <input type="text" class="form-control" id="menu1" name="nama" value="<?= $result[0]['nama'] ?>" required>
         </div>
         <div class="form-group">
-          <label for="jenis">Jenis Menu</label><br>
-          <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="jenis" id="jk" value="Makanan">
-          <label class="form-check-label" for="jenis">Makanan</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="jenis" id="jk" value="Minuman">
-          <label class="form-check-label" for="jenis">Minuman</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="jenis" id="jk" value="Camilan">
-          <label class="form-check-label" for="jenis">Camilan</label>
-        </div>
-        <div class="form-group">
           <label for="harga1">Harga Menu</label>
           <input type="text" class="form-control" id="harga1" name="harga" value="<?= $result[0]['harga'] ?>" required>
         </div>
@@ -64,7 +50,7 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
         </div><br>
         <button type="submit" class="btn btn-primary" name="tambah">Edit</button>
         <!-- <button type="reset" class="btn btn-danger" name="reset">Hapus</button> -->
-        <a href="daftar_menu.php" class="btn btn-success mt-6">Cancel</a>
+        <a href="daftar_menu.php" class="btn btn-success mt-6">Batal</a>
         </form>
   </div>
   </div>
@@ -84,7 +70,6 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
   if(isset($_POST['tambah'])){
     $id = $_POST['id'];
     $nama = $_POST['nama'];
-    $jenis = $_POST['jenis'];
     $harga = $_POST['harga'];
     $id_kategori = $_POST['id_kat'];
     // $nama_file = $_FILES['gambar']['name'];
@@ -104,7 +89,7 @@ $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
 			if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
 				if($ukuran < 1044070){			
 					move_uploaded_file($file_tmp, 'images/'.$gambar);
-					$update = mysqli_query($koneksi, "UPDATE `menu` SET `gambar`='$gambar',`nama`='$nama',`jenis`='$nama',`harga`='$harga' WHERE id='$id' ");
+					$update = mysqli_query($koneksi, "UPDATE `menu` SET `gambar`='$gambar',`nama`='$nama',`harga`='$harga' WHERE id='$id' ");
           if($update){
             header("Location: daftar_menu.php");
             echo 'FILE BERHASIL DI UPLOAD';

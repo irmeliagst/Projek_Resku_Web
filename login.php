@@ -5,6 +5,9 @@ if(isset($_POST['submit'])) {
   $user = $_POST['username'];
   $password = $_POST['password'];
 
+  $_SESSION['pesan_sukses'] = "SUKSES";
+  header('location:daftar_menu.php');
+
   // Query untuk memilih tabel
   $cek_data = mysqli_query($koneksi, "SELECT * FROM login WHERE username = '$user' AND password = '$password'");
   $hasil = mysqli_fetch_array($cek_data);
@@ -45,8 +48,8 @@ if(isset($_POST['submit'])) {
     <title>Halaman Login</title>
   </head>
   <body>
-  <!-- Form Login --> 
-  
+  <!-- Form Login -->
+
     <div class ="container ">
       <!-- <h4 class="text-center">Silahkan isikan nama...</h4> -->
       <img src="images/ress.png" class="card-img-center" class="img-responsive" alt="Cinque Terre" width="370" height="180">

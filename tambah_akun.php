@@ -2,7 +2,7 @@
 ob_start();
 include 'koneksi.php';
 if (isset($_POST['tambah'])) {
-  $id = '';
+  // $id = '';
   $username = $_POST['username'];
   $password = $_POST['password'];
   $nama = $_POST['nama'];
@@ -11,12 +11,6 @@ if (isset($_POST['tambah'])) {
   $telp = $_POST['telp'];
   $status = $_POST['status'];
   $email = $_POST['email'];
-  // $nama_file = $_FILES['gambar']['name'];
-  // $source = $_FILES['gambar']['tmp_name'];
-  // $folder = './upload/';
-
-  // move_uploaded_file($source, $folder.$nama_file);
-  // $insert = mysqli_query($koneksi, "INSERT INTO akun VALUES ('$id', '$nama', '$username', '$password', '$status', '$jk', '$telp', '$alamat', '$gambar')");
 
   $ekstensi_diperbolehkan  = array('png', 'jpg', 'jpeg', 'gif');
   $gambar = $_FILES['gambar']['name'];
@@ -27,7 +21,7 @@ if (isset($_POST['tambah'])) {
   if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
     if ($ukuran < 1044070) {
       move_uploaded_file($file_tmp, 'images/' . $gambar);
-      $insert = mysqli_query($koneksi, "INSERT INTO login VALUES ('$id', '$nama', '$username', '$password', '$status', '$jk', '$telp', '$alamat', '$gambar', '$email')");
+      $insert = mysqli_query($koneksi, "INSERT INTO `login`( `nama`, `username`, `password`, `status`, `jk`, `telp`, `alamat`, `gambar`, `email`) VALUES ('$nama', '$username', '$password', '$status', '$jk', '$telp', '$alamat', '$gambar', '$email')");
       if ($insert) {
         header("Location: daftar_akun.php");
         echo 'FILE BERHASIL DI UPLOAD';
@@ -63,7 +57,7 @@ if (isset($_POST['tambah'])) {
 
   <!-- Form Registrasi -->
   <div class="container">
-    <h3 class="text-center mt-3 mb-5">Talaman Tambah Akun</h3>
+    <h3 class="text-center mt-3 mb-5">Halaman Tambah Akun</h3>
     <div class="card p-5 mb-5">
       <form method="POST" action="tambah_akun.php" enctype="multipart/form-data">
         <div class="form-row">
@@ -87,11 +81,11 @@ if (isset($_POST['tambah'])) {
         <div class="form-group">
           <label for="jk">Jenis Kelamin</label><br>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="jk" id="jk" value="Laki-Laki" required>
+            <input class="form-check-input" type="radio" name="jk" id="jk" value="L" required>
             <label class="form-check-label" for="jk">Laki-Laki</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="jk" id="jk" value="Perempuan" required>
+            <input class="form-check-input" type="radio" name="jk" id="jk" value="P" required>
             <label class="form-check-label" for="jk">Perempuan</label>
           </div>
         </div>
@@ -126,6 +120,7 @@ if (isset($_POST['tambah'])) {
           <input type="file" class="form-control-file border" id="gambar" name="gambar" required>
         </div><br>
         <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
+        <a href="daftar_akun.php" class="btn btn-success mt-6">Batal</a>
 
         <!-- <button type="reset" class="btn btn-danger" name="reset">Hapus</button>
         <button type="reset" class="btn btn-danger" name="reset">Batal</button> -->
